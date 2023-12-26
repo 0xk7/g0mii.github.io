@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>garbage dump</title>
+    <title>Writeups | garbage dump</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -140,9 +140,9 @@
         </v-toolbar-title>
         <v-toolbar-title class="ml-2">
           <a style="color: white" class="ml-3" href="./">garbage dump </a>
-          <a style="color: white" class="ml-7" href="./about.html">About</a>
+          <a style="color: white" class="ml-10" href="./about.html">About</a>
           <a style="color: white" class="ml-2" href="./">Blog</a>
-          <a style="color: white" class="ml-2" href="./writeups/">Writeups</a>
+          <a style="color: white" class="ml-2" href="./writeups.html">Writeups</a>
         </v-toolbar-title>
       </v-app-bar>
 
@@ -150,142 +150,15 @@
         <v-container fluid>
           <section id="blog" v-show="!bloghtml">
             <div class="py-4"></div>
-              <h2 class="display-2 font-weight-bold mb-2 text-uppercase text-center">
-                scraps
+              <h2 class="display-2 font-weight-bold mb-2 text-center">
+                $whoami
               </h2>
 
-              <v-container :class="side_padding">
-                <v-row>
-                  <v-col
-                    v-for="({ src, img, title, text, date}, i) in articles"
-                    :key="i"
-                    cols="12"
-                    xs="12"
-                    sm="6"
-                    md="4"
-                    lg="4"
-                    xl="3"
-                  >
-                    <v-card
-                      elevation="4"
-                      hover
-                      class="ma-0 pt-6 pb-2"
-                      :href="'?src=' + src"
-                    >
-                      <v-img
-                        :src="img?img:image(title||src)"
-                        height="200px"
-                        Contain
-                      ></v-img>
-                      <v-card-title> {{title||src}} </v-card-title>
-                      <v-card-text>  {{text}} </v-card-text>
-                      <v-card-text v-for="item in blogprop.topics"> {{ item }} </v-card-text>
-                      <span style="margin: 16px"> {{date}}</span>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-container>
+             
               <div class="py-12"></div>
           </section>
 
-          <section v-show="bloghtml">
-            <div class="py4-"></div>
-            <v-container>
-              <div align="center" :style="'margin-left: ' + center_margin">
-                <v-img
-                  height="200"
-                  :src="blogprop.img?blogprop.img:(blogprop.title||blogprop.src)"
-                />
-              </div>
-              <h1 align="center" :style="'margin-left: ' + center_margin">
-                {{blogprop.title||blogprop.src}}
-              </h1>
-              <p align="center" :style="'margin-left: ' + center_margin">
-                {{blogprop.date}}
-              </p>
-            </v-container>
-
-            <v-container :class="side_padding">
-              <v-row>
-                <v-col
-                  cols="12"
-                  xs="12"
-                  sm="12"
-                  md="12"
-                  lg="8"
-                  xl="8"
-                  :class="side_padding"
-                >
-                  <v-card
-                    elevation="2"
-                    class="pa-4"
-                    :min-height="'calc(50vh - 120px - ' + $vuetify.application.top + 'px )'"
-                  >
-                    <div class="content" v-html="bloghtml"></div>
-                  </v-card>
-                </v-col>
-                <v-col
-                  cols="12"
-                  xs="12"
-                  sm="12"
-                  md="12"
-                  lg="4"
-                  xl="4"
-                  :class="side_padding"
-                >
-                  <v-card
-                    elevation="2"
-                    class="pa-4 mb-2"
-                    :style="'width:' + side_width + ';'"
-                  >
-                    <span class="title"> Topics</span>
-                    <div class="py-1"></div>
-                    <v-chip v-for="item in blogprop.topics" class="ma-1">
-                      {{item}}
-                    </v-chip>
-                  </v-card>
-                  <div
-                    style="
-                      position: -webkit-sticky;
-                      position: sticky;
-                      top: 60px;
-                    "
-                  >
-                    <v-card
-                      elevation="2"
-                      class="pa-4 mb-2"
-                      :style="'width:' + side_width + ';'"
-                    >
-                      <span class="title"> Author</span>
-                      <div class="ma-2">
-                        <v-img
-                          class="pa-2"
-                          contain
-                          width="40"
-                          :src="blogprop.author?blogprop.author.avatar?blogprop.author.avatar:(blogprop.author.name):image(blogprop.src)"
-                        />
-                      </div>
-                      <div class="pa-1">
-                        {{blogprop.author?blogprop.author.name:""}}
-                      </div>
-                      <div class="pa-1">
-                        {{blogprop.author?blogprop.author.message:""}}
-                      </div>
-                    </v-card>
-                    <v-card
-                      v-show="clientWidth > 1280 - 16"
-                      elevation="2"
-                      class="pa-4"
-                      :style="'width:' + side_width + ';'"
-                    >
-                      <span class="title"> Contents</span>
-                      <div class="toc"></div>
-                    </v-card>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-container>
-          </section>
+          
         </v-container>
       </v-main>
 
@@ -299,8 +172,6 @@
     </div>
     
     <script type="module">
-      import index from "./index.js";
-
       new Vue({
         el: "#app",
         vuetify: new Vuetify({
@@ -333,7 +204,6 @@
               author: { name: "", avatar: "", message: "" },
               text: "",
             },
-            articles: index(),
             clientWidth: 0,
             clientHeight: 0,
           };
